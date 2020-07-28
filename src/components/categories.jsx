@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     display:'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     margin: '20px',
   },
   categories: {
@@ -45,7 +45,6 @@ const Categories = (props) => {
       </Typography>
       <div className={classes.categories}>
         <Divider />
-        <ul>
       {props.categories.map( item => {
         return (
           <Button value={item.category} className={classes.links} onClick={(event) => {
@@ -55,7 +54,6 @@ const Categories = (props) => {
           </Button>
         )
       })}
-      </ul>
       </div>
       </div>
 
