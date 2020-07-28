@@ -12,11 +12,13 @@ import {connect} from 'react-redux';
 import {setActiveCategory} from '../store/categories.jsx'
 
 
+
 const useStyles = makeStyles((theme) => ({
   productsRoot: {
     display: 'flex',
     flexWrap: 'true',
     padding: '1em',
+    justifyContent:'center',
   },
   card: {
     margin: '1em',
@@ -49,22 +51,25 @@ const Products = (props) => {
 
             return(
             <Card className={classes.card} >
-            <CardHeader title={product.name} subheader={checkAvaiable(product)}
+            <CardHeader title={product.name} subheader={`${checkAvaiable(product)} (${product.count})` }
              />
             <CardMedia 
             className={classes.media} 
               image="https://images.pexels.com/photos/4158/apple-iphone-smartphone-desk.jpg?auto=compress&cs=tinysrgb&h=750&w=1260"
               />
               <CardContent>
-               <Button>Show Details</Button>
+               <Button size="small">Show Details</Button>
                 <Divider />
-                <Button>Add To Cart</Button>
+                <Button size="small">Add To Cart</Button>
               </CardContent>
+
           </Card>
+
             )
           } else {
             return(null);
           }
+          
         })}
         
       </div>

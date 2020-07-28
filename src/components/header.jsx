@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme) => ({
       width: 'auto',
     },
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   searchIcon: {
     padding: theme.spacing(0, 2),
     height: '100%',
@@ -61,16 +58,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
+    marginRight: theme.spacing(2),
     color: 'white',
-  },
-  Bar: {
-    alignItems: "center",
+    width:'1em',
   },
   Cart: {
-    justifyContent: 'center',
-    alignSelf: 'center' ,
-    marginLeft: '100px'
+    display:'flex',
+    alignItems: 'flex-end' ,
   },
+  Bar: {
+    display:"flex",
+    alignItems:'center',
+    justifyContent:'space-between',
+    margin:'1em'
+  }
 }));
 
 const Header = () => {
@@ -79,11 +80,12 @@ const Header = () => {
 
   return (
     <AppBar position="static">
+      <div className={classes.headerRoot}>
       <ToolBar className={classes.Bar}>
         <IconButton edge="start" >
           <StoreMallDirectoryOutlined className={classes.logo} />
         </IconButton>
-        <Typography className="title" variant="h3" noWrap gutterBottom="true"> 
+        <Typography className="title" variant="h3" noWrap > 
             Paul's Store!
         </Typography>
         <div className={classes.search}>
@@ -103,6 +105,7 @@ const Header = () => {
           <span>(3)</span>
         </div>
       </ToolBar>
+      </div>
     </AppBar>
   )
 }
