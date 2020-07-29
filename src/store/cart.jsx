@@ -16,7 +16,7 @@ export default (state= initialState, action) => {
       }
       return [...state];
     }
-    return [...state];
+    return state;
   case 'RESET': 
     return initialState;
   default: 
