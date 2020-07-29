@@ -1,10 +1,11 @@
 import React from 'react';
-import {AppBar, IconButton, Typography, InputBase} from '@material-ui/core';
+import {AppBar, IconButton, Typography, InputBase, Badge} from '@material-ui/core';
 import ToolBar from '@material-ui/core/Toolbar'
 import { StoreMallDirectoryOutlined} from '@material-ui/icons';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import {connect} from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,12 +72,17 @@ const useStyles = makeStyles((theme) => ({
     alignItems:'center',
     justifyContent:'space-between',
     margin:'1em'
-  }
+  },
+  badge: {
+    right: -28,
+    top: -13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
 }));
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles();
-
 
   return (
     <AppBar position="static">
@@ -100,14 +106,22 @@ const Header = () => {
             }}
             />
         </div>
-        <div className={classes.Cart}>
-          <ShoppingCartIcon />
-          <span>(3)</span>
-        </div>
+        <IconButton edge='end' disableRipple="false" size="small"	>
+          <Badge badgeContent={
+            props.cart.length || '0'} color="secondary" className={classes.badge} />
+          <ShoppingCartIcon/>
+        </IconButton>
+        
       </ToolBar>
       </div>
     </AppBar>
   )
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    cart: state.cart,
+  }
+}
+
+export default connect(mapStateToProps, null)(Header);
