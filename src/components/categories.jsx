@@ -14,20 +14,27 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     margin: '20px',
+    width:'30vw',
   },
   categories: {
-    alignItems:'center',
-    padding: '.5em',
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'baseline',
+    padding: '.25em',
+    marginBottom:'20px',
+    justifyContent:'center',
   },
   links: {
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center',
+    flexWrap:'wrap',
     padding:'1em',
-    margin:'5px',
-    display: 'inline-block'
   },
   CurrentSelection: {
     display: 'flex',
     flexDirection: 'column',
-    width: 'auto',
     justifyContent: 'center',
     alignItems: 'center',
   }
@@ -42,12 +49,13 @@ const Categories = (props) => {
       
       <Typography variant="h6" noWrap gutterBottom="true">
      Browse our Categories
+      <Divider />
       </Typography>
       <div className={classes.categories}>
-        <Divider />
+      
       {props.categories.map( item => {
         return (
-          <Button value={item.category} className={classes.links} onClick={(event) => {
+          <Button type="text" color="primary" size="small" value={item.category} className={classes.links} onClick={(event) => {
             event.preventDefault();
             props.setActiveCategory(item.category);
           }}> {item.displayName}
@@ -58,10 +66,10 @@ const Categories = (props) => {
       </div>
 
       <div className={classes.CurrentSelection}>
-    <Typography variant="h2" noWrap >
+    <Typography variant="h4" noWrap >
       {props.activeCategory || 'Choose a Category'}
     </Typography>
-    <Typography variant="h5" Wrap > 
+    <Typography variant="p" Wrap > 
      {props.categories.map( (description) => {
       if( description.category === props.activeCategory) {
         return (description.description)
@@ -75,7 +83,6 @@ const Categories = (props) => {
 }
 
 const mapStateToProps = state => {
-  console.log(state.category.activeCategory)
   return {
     activeCategory: state.category.activeCategory,
     categories: state.category.categories,

@@ -10,6 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux';
 import {setActiveCategory} from '../store/categories.jsx'
+import {addToCart, removeFromCart, reset} from '../store/cart.jsx'
 
 
 
@@ -51,7 +52,7 @@ const Products = (props) => {
 
             return(
             <Card className={classes.card} >
-            <CardHeader title={product.name} subheader={`${checkAvaiable(product)} (${product.count})` }
+            <CardHeader title={product.name} subheader={`${checkAvailable(product)} (${product.count})` }
              />
             <CardMedia 
             className={classes.media} 
@@ -60,7 +61,16 @@ const Products = (props) => {
               <CardContent>
                <Button size="small">Show Details</Button>
                 <Divider />
-                <Button size="small">Add To Cart</Button>
+                <Button 
+                disabled={disabled(product)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  props.addToCart(product)
+                  product.count -= 1;
+                }}
+                >
+                  Add To Cart
+                  </Button>
               </CardContent>
 
           </Card>
@@ -76,11 +86,19 @@ const Products = (props) => {
     </Container>
   )
 }
-const checkAvaiable = (product) => {
+const checkAvailable = (product) => {
   if(product.count > 0 ){
     return 'Available'
   } else {
     return 'Not Available'
+  }
+}
+
+const disabled = (product) => {
+  if(product.count > 0 ){
+    return false
+  } else {
+    return 'disabled'
   }
 }
 
@@ -89,8 +107,9 @@ const mapStateToProps = state => {
     activeCategory: state.category.activeCategory,
     categories: state.category.categories,
     products: state.category.products,
+    cart: state.cart,
   }
 }
-const mapDispatchToProps = {setActiveCategory};
+const mapDispatchToProps = {setActiveCategory, addToCart, removeFromCart, reset};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
