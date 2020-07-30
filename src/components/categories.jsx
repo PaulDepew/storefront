@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import { makeStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux';
-import {setActiveCategory} from '../store/categories.jsx'
+import {setActiveCategory, getCategories, getProducts, adjustInventory} from '../store/categories.jsx'
 
 const useStyles = makeStyles((theme) => ({
   categoriesRoot: {
@@ -41,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Categories = (props) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    props.getCategories();
+    props.getProducts();
+}, []);
 
   return (
     <Container maxWidth="fluid">
@@ -88,7 +93,7 @@ const mapStateToProps = state => {
     categories: state.category.categories,
   }
 }
-const mapDispatchToProps = {setActiveCategory};
+const mapDispatchToProps = {setActiveCategory,  getCategories, getProducts, adjustInventory};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
 
