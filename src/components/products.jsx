@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux';
-import {setActiveCategory} from '../store/categories.jsx'
+import {setActiveCategory, getCategories, getProducts, adjustInventory} from '../store/categories.jsx'
 import {addToCart, removeFromCart, reset} from '../store/cart.jsx'
 
 
@@ -43,7 +43,12 @@ const useStyles = makeStyles((theme) => ({
 const Products = (props) => {
   const classes = useStyles();
   
+  useEffect(() => {
+      props.getCategories();
+      props.getProducts();
+  }, []);
 
+  console.log(props);
   return (
     <Container maxWidth="fluid">
       <div className={classes.productsRoot}>
@@ -110,6 +115,6 @@ const mapStateToProps = state => {
     cart: state.cart,
   }
 }
-const mapDispatchToProps = {setActiveCategory, addToCart, removeFromCart, reset};
+const mapDispatchToProps = {setActiveCategory, addToCart, removeFromCart, reset, getCategories, getProducts, adjustInventory};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
