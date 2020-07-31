@@ -15,15 +15,17 @@
 
 Clone the Git repository
 Install Dependencies
-   -   "@material-ui/core": "^4.11.0",
+   - "@material-ui/core": "^4.11.0",
    - "@material-ui/icons": "^4.9.1",
+   - "axios": "^0.19.2",
    - "node-sass": "^4.14.1",
    - "react": "^16.13.1",
    - "react-dom": "^16.13.1",
    - "react-redux": "^7.2.1",
    - "react-scripts": "^3.4.1",
    - "redux": "^4.0.5",
-   - "redux-devtools-extension": "^2.13.8"
+   - "redux-devtools-extension": "^2.13.8",
+   - "redux-thunk": "^2.3.0"
   
 
 Assign Scripts:
@@ -53,4 +55,4 @@ npm test
 
 #### UML
 
-![REACT_UML](./ToDo_UML.pdf)
+![REACT_UML]()

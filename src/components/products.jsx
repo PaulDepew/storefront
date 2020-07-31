@@ -8,8 +8,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
-import {setActiveCategory, getCategories, getProducts, adjustInventory} from '../store/categories.jsx'
+import {setActiveCategory, getCategories, getProducts, adjustInventory, getOneProduct} from '../store/categories.jsx'
 import {addToCart, removeFromCart, reset} from '../store/cart.jsx'
 
 
@@ -48,7 +49,6 @@ const Products = (props) => {
       props.getProducts();
   }, []);
 
-  console.log(props);
   return (
     <Container maxWidth="fluid">
       <div className={classes.productsRoot}>
@@ -64,7 +64,12 @@ const Products = (props) => {
               image="https://images.pexels.com/photos/4158/apple-iphone-smartphone-desk.jpg?auto=compress&cs=tinysrgb&h=750&w=1260"
               />
               <CardContent>
-               <Button size="small">Show Details</Button>
+            <Link to="details">
+            <Button  size="small" value={product.id} onClick={(e)=> {
+              props.getOneProduct(product.id)
+            }}
+            >Show More!</Button>
+            </ Link>
                 <Divider />
                 <Button 
                 disabled={disabled(product)}
@@ -113,8 +118,9 @@ const mapStateToProps = state => {
     categories: state.category.categories,
     products: state.category.products,
     cart: state.cart,
+    activeProduct: state.activeProduct,
   }
 }
-const mapDispatchToProps = {setActiveCategory, addToCart, removeFromCart, reset, getCategories, getProducts, adjustInventory};
+const mapDispatchToProps = {setActiveCategory, addToCart, removeFromCart, reset, getCategories, getProducts, adjustInventory, getOneProduct};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
