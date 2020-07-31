@@ -4,6 +4,7 @@ import ToolBar from '@material-ui/core/Toolbar'
 import { StoreMallDirectoryOutlined} from '@material-ui/icons';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Link } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 
@@ -88,9 +89,11 @@ const Header = (props) => {
     <AppBar position="static">
       <div className={classes.headerRoot}>
       <ToolBar className={classes.Bar}>
-        <IconButton edge="start" >
+        <Link to="/">
+        <IconButton  edge="start">
           <StoreMallDirectoryOutlined className={classes.logo} />
         </IconButton>
+        </Link>
         <Typography className="title" variant="h3" noWrap > 
             Paul's Store!
         </Typography>
@@ -106,11 +109,13 @@ const Header = (props) => {
             }}
             />
         </div>
+        <Link to="/shoppingcart">
         <IconButton edge='end' disableRipple="false" size="small"	>
           <Badge badgeContent={
             props.cart.length || '0'} color="secondary" className={classes.badge} />
           <ShoppingCartIcon/>
         </IconButton>
+        </Link>
         
       </ToolBar>
       </div>
